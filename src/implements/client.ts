@@ -485,6 +485,17 @@ class Client {
     return await this.sendRequest('hostControlSafe_start', [clientId], this.id);
   }
 
+  
+  public async updatePropertiesOfClient(this: OPSIApi, productId: string, properties: {}, objectId: string): Promise<IfcResult> {
+    this.resetResult();
+    if (!clientId || clientId === '' || !properties || !objectId) {
+      this.res.message = 'Please define a product id, an properties array and the object id of the target client!';
+      return this.res;
+    }
+
+    return await this.sendRequest('setProductProperties', [productId, properties, objectId], this.id);
+  }
+
   /**
    * sent a popup message to the client that appears instantly on the client desktop.
    *
